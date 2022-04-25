@@ -34,30 +34,31 @@ class ModbusHandler{
     send({
         modbus_id,
         modbus_fc,
-        modbus_args,
+        modbus_address,
+        modbus_value
     }) {
 
         this.connection.setID(modbus_id);
         switch (modbus_fc) {
             case 1:
-                return this.connection.readCoils(...modbus_args)
+                return this.connection.readCoils(modbus_address, modbus_value)
             case 2:
-                return this.connection.readDiscreteInputs(...modbus_args)
+                return this.connection.readDiscreteInputs(modbus_address, modbus_value)
             case 3:
-                return this.connection.readHoldingRegisters(...modbus_args)
+                return this.connection.readHoldingRegisters(modbus_address, modbus_value)
             case 4:
-                return this.connection.readInputRegisters(...modbus_args)
+                return this.connection.readInputRegisters(modbus_address, modbus_value)
             case 5:
-                return this.connection.writeCoil(...modbus_args)
+                return (val) => {return this.connection.writeCoil(modbus_address, val)}
             case 6:
-                return this.connection.writeRegister(...modbus_args)
+                return (val) => {return this.connection.writeRegister(modbus_address, val)}
             case 15:
-                return this.connection.writeCoils(...modbus_args)
+                return (val) => {return this.connection.writeCoils(modbus_address, val)}
             case 16:
-                return this.connection.writeRegisters(...modbus_args)
+                return (val) => {return this.connection.writeRegisters(modbus_address, val)}
             case 14:
             case 43:
-                return this.connection.readDeviceIdentification(...modbus_args)
+                return this.connection.readDeviceIdentification(modbus_address, modbus_value)
             default:
                 throw exception.NotImplementedError;
         }
@@ -99,11 +100,15 @@ class Hardware{
         // build hardware commands
         Object.keys(deviceList).forEach((device) => {
             let hwid = deviceList[device].hardware;
-            
-            fnobj[device] = {
-                modbus_id: deviceList[device].id,
-                modbus_fc: this.hwlib[hwid].commands
-            }
+            Object.keys(this.hwlib[hwid].commands).forEach((command) => {
+                if (fnobj[device] == undefined) fnobj[device] = {}
+                fnobj[device][command] = {
+                    modbus_id: deviceList[device].id,
+                    modbus_fc: this.hwlib[hwid][command].fc,
+                    modbus_address: this.hwlib[hwid][command].address,
+                    modbus_value: this.hwlib[hwid][command].length
+                }
+            })
         });
 
 
