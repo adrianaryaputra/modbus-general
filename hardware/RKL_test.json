@@ -1,0 +1,16 @@
+{
+    "name": "RKL-03",
+    "description": "Rikasensor Modbus RTU Water Level 5/10/15/20/30m",
+    "commands": {
+        "measureLevel": {
+            "function": 3,
+            "address": 0,
+            "length": 1
+        },
+        "changeAddress": {
+            "function": 6,
+            "address": 107,
+            "length": 1
+        }
+    }
+}
