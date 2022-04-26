@@ -26,7 +26,7 @@ I create this program to make my life easier LOL. It is common for me needing to
 
 
 ## Hardware Definition File
-Place the hardwqare definition json file on hardware folder with name `HARDWARE_NAME.json`. Configuration file's device hardware name will search on those folder for corresponding hardware based on the file name.  
+Place the hardware definition json file on `/hardware` folder with name `HARDWARE_NAME.json`. Configuration file's device hardware name will search on those folder for corresponding hardware based on the file name.  
 ```json
 {
     "name": "HARDWARE_NAME",
