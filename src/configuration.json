@@ -12,12 +12,12 @@
         "port": "/dev/ttyUSB0",
         "baud": 9600,
         "retry": 3,
-        "timeout": 500,
-        "device": {
-            "RWT_Level": {
-                "id": 1,
-                "hardware": "RKL_03"
-            }
+        "timeout": 500
+    },
+    "devices": {
+        "RWT_Level": {
+            "id": 1,
+            "hardware": "RKL_03"
         }
     }
 }

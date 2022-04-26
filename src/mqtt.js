@@ -45,11 +45,17 @@ class MQTT{
 
         this.client.on('connect', () => {
             console.debug('connected to mqtt broker')
+            this.connected = true;
 
             // subscribe to all topics listed
             this.listenedTopics.forEach(topic => {
                 this.client.subscribe(topic)
             });
+        });
+
+        this.client.on("disconnect", () => {
+            console.debug('disconnected from mqtt broker')
+            this.connected = false;
         });
 
         this.client.on('message', (topic, message) => {
@@ -68,7 +74,8 @@ class MQTT{
 
     publish(topic, message, next) {
 
-        if (this.client.connected) {
+        console.log("publishing message on topic " + topic);
+        if (this.connected) {
             this.client.publish(topic, message, next)
         }
         else { throw MQTTNotConnectedError }

@@ -28,9 +28,7 @@ class ModbusHandler{
 
 
     open() {
-
         this.bus.connectRTUBuffered(this.config.port, { baudRate: this.config.baud });
-
     }
 
 
@@ -103,12 +101,13 @@ class Modbus{
 
 
     constructor({
+        configPath = "./configuration.json",
         hwPath = "./hardware"
     }={}) {
 
         // load modbus handler
-        this.modbusHandler = new ModbusHandler();
-        console.log(this.modbusHandler);
+        this.modbusHandler = new ModbusHandler({configPath});
+        console.debug(this.modbusHandler);
 
         // read hardware json
         let files = fs.readdirSync(hwPath);
@@ -126,24 +125,15 @@ class Modbus{
     open() { this.modbusHandler.open() }
 
 
-    whois(device) {
+    build({
+        deviceConfigPath = "./configuration.json"
+    }={}) {
 
-        let hw = this.modbusHandler.config.device[device];
-        let hwid = hw.hardware;
-        return {
-            id: hw.id,
-            hardware: hwid,
-            name: this.hwlib[hwid].name,
-            description: this.hwlib[hwid].description,
-            commands: this.hwlib[hwid].commands
-        }
-
-    }
-
-
-    build() {
-
-        let deviceList = this.modbusHandler.config.device;
+        // read configuration json
+        let allcfg = JSON.parse(
+            fs.readFileSync(deviceConfigPath)
+        );
+        let deviceList = allcfg.devices;
 
         console.debug(deviceList);
         console.debug(Object.keys(deviceList));
