@@ -40,7 +40,29 @@ Mqtt.open();
 // send modbus command from mqtt
 Mqtt.client.on('message', (topic, message) => {
 
-    // if topic is MODBUS
+    _mqHandleTopicMODBUS(topic, message);
+    _mqHandleTopicGetConfig(topic, message);
+
+});
+
+
+
+function _mqHandleTopicGetConfig(topic, message) {
+
+    if (topic.includes('getConfig')) {
+
+        // let hwlib = Modbus.hwlib
+        let config = Modbus.modbusHandler.config;
+
+        Mqtt.publish(`${topic}`, JSON.stringify(config));
+    }
+
+}
+
+
+
+function _mqHandleTopicMODBUS(topic, message) {
+
     if (topic.includes('MODBUS') && !topic.includes('error')) {
 
         // parse message JSON
@@ -62,6 +84,5 @@ Mqtt.client.on('message', (topic, message) => {
             Mqtt.publish(`${topic}/error`, JSON.stringify(err));
         });
     }
-});
 
-
+}
