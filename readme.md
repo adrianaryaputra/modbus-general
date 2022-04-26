@@ -6,19 +6,22 @@ I create this program to make my life easier LOL. It is common for me needing to
 ## Configuration File
 ```json
 {
-    "mqtt_host": "YOUR_MQTT_HOST",
-    "mqtt_port": YOUR_MQTT_PORT,
-    "mqtt_user": "YOUR_MQTT_USERNAME",
-    "mqtt_password": "YOUR_MQTT_PASSWORD",
-    
-    "port": "SERIAL_PORT",
-    "baud": SERIAL_BAUD,
-    "retry": SERIAL_RETRY_COUNT,
-    "timeout": SERIAL_TIMEOUT,
-    "device": {
-        "ANY_DEVICE_NAME": {
-            "id": MODBUS_ID,
-            "hardware": "HARDWARE_NAME"
+    "mqtt": {
+        "host": "MQTT_HOST",
+        "port": 1883,
+        "user": "MQTT_USERNAME",
+        "password": ""
+    },
+    "modbus": {
+        "port": "/dev/ttyUSB0",
+        "baud": 9600,
+        "retry": 3,
+        "timeout": 500,
+        "device": {
+            "DEVICE_NAME": {
+                "id": 1,
+                "hardware": "HARDWARE_NAME"
+            }
         }
     }
 }

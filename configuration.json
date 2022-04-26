@@ -1,17 +1,20 @@
 {
-    "mqtt_host": "localhost",
-    "mqtt_port": 1883,
-    "mqtt_user": "Cluster_RWT",
-    "mqtt_password": "",
-    
-    "port": "/dev/ttyUSB0",
-    "baud": 9600,
-    "retry": 3,
-    "timeout": 500,
-    "device": {
-        "RWT_Level": {
-            "id": 1,
-            "hardware": "RKL_03"
+    "mqtt": {
+        "host": "localhost",
+        "port": 1883,
+        "user": "Cluster_RWT",
+        "password": ""
+    },
+    "modbus": {
+        "port": "/dev/ttyUSB0",
+        "baud": 9600,
+        "retry": 3,
+        "timeout": 500,
+        "device": {
+            "RWT_Level": {
+                "id": 1,
+                "hardware": "RKL_03"
+            }
         }
     }
 }

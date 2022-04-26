@@ -15,9 +15,10 @@ class ModbusHandler{
     }={}) {
 
         // read configuration json
-        this.config = JSON.parse(
+        let allcfg = JSON.parse(
             fs.readFileSync(configPath)
         );
+        this.config = allcfg.modbus;
         console.debug(this.config)
 
         // create modbus bus
@@ -136,7 +137,7 @@ class Modbus{
             description: this.hwlib[hwid].description,
             commands: this.hwlib[hwid].commands
         }
-        
+
     }
 
 
