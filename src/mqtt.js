@@ -1,5 +1,9 @@
 const mqtt = require('mqtt')
+const fs = require('fs');
 const { MQTTNotConnectedError } = require('./exception')
+
+var DEBUG = true;
+if(!DEBUG){console.debug = ()=>{}}
 
 
 
@@ -45,8 +49,13 @@ class MQTT{
             // subscribe to all topics listed
             this.listenedTopics.forEach(topic => {
                 this.client.subscribe(topic)
-            })
-        })
+            });
+        });
+
+        this.client.on('message', (topic, message) => {
+            console.debug(`received message on topic ${topic}`);
+            console.debug(message.toString());
+        });
 
     }
 
@@ -68,3 +77,7 @@ class MQTT{
 
 
 }
+
+
+
+module.exports = MQTT;
