@@ -1,0 +1,16 @@
+{
+    "name": "RK400-04",
+    "description": "Rikasensor Modbus RTU Economical Tipping Bucket Rainfall Sensor",
+    "commands": {
+        "measureRainfall": {
+            "fc": 3,
+            "address": 0,
+            "length": 1
+        },
+        "changeAddress": {
+            "fc": 6,
+            "address": 4096,
+            "length": 1
+        }
+    }
+}

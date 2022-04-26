@@ -122,8 +122,21 @@ class Modbus{
     }
 
 
-    open() {
-        this.modbusHandler.open();
+    open() { this.modbusHandler.open() }
+
+
+    whois(device) {
+
+        let hw = this.modbusHandler.config.device[device];
+        let hwid = hw.hardware;
+        return {
+            id: hw.id,
+            hardware: hwid,
+            name: this.hwlib[hwid].name,
+            description: this.hwlib[hwid].description,
+            commands: this.hwlib[hwid].commands
+        }
+        
     }
 
 

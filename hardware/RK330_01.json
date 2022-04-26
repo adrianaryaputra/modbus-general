@@ -1,0 +1,37 @@
+{
+    "name": "RK330-01",
+    "description": "Rikasensor Modbus RTU Atmospheric Temperature, Humidity, and Pressure Sensor",
+    "commands": {
+        "measureTemperature": {
+            "fc": 3,
+            "address": 0,
+            "length": 2
+        },
+        "measureHumidity": {
+            "fc": 3,
+            "address": 1,
+            "length": 2
+        },
+        "measurePressure": {
+            "fc": 3,
+            "address": 2,
+            "length": 2
+        },
+        "changeAddress": {
+            "fc": 6,
+            "address": 0,
+            "length": 1
+        },
+        "changeBaud": {
+            "fc": 6,
+            "address": 128,
+            "length": 2
+        },
+        "changeParity": {
+            "fc": 6,
+            "address": 129,
+            "length": 2
+        }
+
+    }
+}
