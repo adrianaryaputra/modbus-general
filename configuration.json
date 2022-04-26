@@ -2,8 +2,11 @@
     "mqtt": {
         "host": "localhost",
         "port": 1883,
-        "user": "Cluster_RWT",
-        "password": ""
+        "clientId": "Cluster_RWT",
+        "username": "",
+        "password": "",
+        "connectTimeout": 4000,
+        "reconnectPeriod": 1000
     },
     "modbus": {
         "port": "/dev/ttyUSB0",

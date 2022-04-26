@@ -10,6 +10,21 @@ NotImplementedError.prototype = Object.create(Error.prototype, {
     }},
 });
 
+
+function MQTTNotConnectedError(message) {
+    this.message = message || "MQTT is not connected.";
+}
+
+MQTTNotConnectedError.prototype = Object.create(Error.prototype, {
+    constructor: { value: MQTTNotConnectedError },
+    name: { value: 'MQTTNotConnectedError' },
+    stack: { get: function() {
+        return new Error().stack;
+    }},
+});
+
+
 module.exports = {
-    NotImplementedError
+    NotImplementedError,
+    MQTTNotConnectedError,
 }
